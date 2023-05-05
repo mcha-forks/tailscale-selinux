@@ -78,6 +78,7 @@ allow tailscaled_t self:capability { setgid };
 # Allow tailscaled_t capabilities required when login is setup after SSH and before shell is spawned
 allow tailscaled_t self:capability { setuid chown fowner fsetid };
 # Allow tailscaled_t to use ptrace. Required by logging tracebacks
+allow tailscaled_t self:capability { sys_ptrace };
 allow tailscaled_t self:cap_userns { sys_ptrace };
 
 # Section 2 - Ends here
@@ -102,6 +103,7 @@ corecmd_exec_bin(tailscaled_t)
 kernel_read_network_state(tailscaled_t)
 # Allow tailscaled_t to read network sysctls - defined in kernel/kernel.if
 kernel_read_net_sysctls(tailscaled_t)
+kernel_dontaudit_search_fs_sysctl(tailscaled_t)
 # Allow tailscaled_t to read hardware state information from /sysfs - defined in kernel/devices.if
 dev_read_sysfs(tailscaled_t)
 
@@ -137,6 +139,8 @@ kernel_request_load_module(tailscaled_t)
 allow tailscaled_t self:tun_socket create;
 # Allow tailscaled_t to read and write to TUN/TAP virtual network device - defined in kernel/corenetwork.if
 corenet_rw_tun_tap_dev(tailscaled_t)
+# Allow tailscaled_t to access raw interface
+corenet_raw_bind_generic_node(tailscaled_t)
 
 # Allow tailscaled_t to create sockets to use for the netlink families - generic and route
 # These rules are part of wireguard as well. Ref - wireguard.te
