@@ -12,6 +12,7 @@ policy_module(tailscaled, 1.0.0)
 gen_require(`
 	type devpts_t;
 	type sshd_key_t;
+	type httpd_t;
 ')
 
 ########################################
@@ -202,3 +203,12 @@ optional_policy(`
 ')
 
 # Section 5 - Ends here
+
+# Section 6 - Starts here
+# Allow various third-party integrations
+
+# Allow Caddy to issue a certificate automatically
+allow httpd_t tailscale_var_run_t:sock_file { write };
+allow httpd_t tailscaled_t:unix_stream_socket { connectto };
+
+# Section 6 - Ends here
