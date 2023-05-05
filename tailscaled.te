@@ -68,7 +68,7 @@ manage_lnk_files_pattern(tailscaled_t, tailscale_var_run_t, tailscale_var_run_t)
 allow tailscaled_t self:process { transition setexec setsched };
 # allow $1 self:process { setsched siginh noatsecure rlimitinh setexec transition };
 # Allow tailscaled_t to use net_admin capabilities. Required when the daemon starts
-allow tailscaled_t self:capability { net_admin };
+allow tailscaled_t self:capability { net_admin net_raw };
 # Allow tailscaled_t to use sensitive DAC capabilities. Required when SSH is attempted
 allow tailscaled_t self:capability { dac_read_search dac_override };
 # Allow tailscaled_t to configure tty devices. Required when login is being setup after SSH
@@ -77,6 +77,8 @@ allow tailscaled_t self:capability { sys_tty_config };
 allow tailscaled_t self:capability { setgid };
 # Allow tailscaled_t capabilities required when login is setup after SSH and before shell is spawned
 allow tailscaled_t self:capability { setuid chown fowner fsetid };
+# Allow tailscaled_t to use ptrace. Required by logging tracebacks
+allow tailscaled_t self:cap_userns { sys_ptrace };
 
 # Section 2 - Ends here
 
