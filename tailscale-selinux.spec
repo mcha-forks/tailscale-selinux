@@ -2,7 +2,7 @@
 %global modulename tailscaled
 
 Name:           tailscale-selinux
-Version:        0.0.0
+Version:        0.0.1
 Release:        %autorelease
 Summary:        Tailscale SELinux policy
 License:        BSD
@@ -12,6 +12,7 @@ BuildArch:      noarch
 Source0:        %{modulename}.fc
 Source1:        %{modulename}.if
 Source2:        %{modulename}.te
+Source3:        LICENSE
 
 Requires:       selinux-policy-%{selinuxtype}
 Requires(post): selinux-policy-%{selinuxtype}
@@ -22,7 +23,10 @@ BuildRequires:  selinux-policy-devel
 Tailscale VPN SELinux policy.
 
 %prep
-
+mkdir -p %{name}-build
+cp %{SOURCE3} .
+cd %{name}-build
+cp %{SOURCE0} %{SOURCE1} %{SOURCE2} .
 
 %build
 make -f %{_datadir}/selinux/devel/Makefile %{modulename}.pp
