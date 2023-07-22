@@ -1,0 +1,4 @@
+/*.rpm
+/tailscale-selinux-*.tar.gz
+/tailscale-selinux-*/
+/results_tailscale-selinux/
