@@ -173,6 +173,8 @@ kernel_dgram_send(tailscaled_t)
 
 # Allow tailscaled in tailscaled_t context to execute /usr/bin/login which has a context of login_exec_t
 can_exec(tailscaled_t, login_exec_t)
+# Allow tailscaled in tailscaled_t context to execute login shells e.g. /usr/bin/bash which has a context of shell_exec_t
+can_exec(tailscaled_t, shell_exec_t)
 # Make tailscaled_t context an entry point for auth login programs like /usr/bin/login
 auth_login_entry_type(tailscaled_t)
 # Make tailscaled_t a domain that is used for a login program (/usr/bin/login) - defined in system/authlogin.if
