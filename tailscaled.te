@@ -100,6 +100,9 @@ ps_process_pattern(tailscaled_t, domain)
 # Allow tailscaled_t to execute generic programs in bin directory without a domain transition - defined in kernel/corecommands.if
 corecmd_exec_bin(tailscaled_t)
 
+# Allow tailscaled_t to execute system-wide user shells - defined in kernel/corecommands.if
+corecmd_exec_shell(tailscaled_t)
+
 # Allow tailscaled_t to read the network state information - defined in kernel/kernel.if
 kernel_read_network_state(tailscaled_t)
 # Allow tailscaled_t to read network sysctls - defined in kernel/kernel.if
@@ -173,8 +176,6 @@ kernel_dgram_send(tailscaled_t)
 
 # Allow tailscaled in tailscaled_t context to execute /usr/bin/login which has a context of login_exec_t
 can_exec(tailscaled_t, login_exec_t)
-# Allow tailscaled in tailscaled_t context to execute login shells e.g. /usr/bin/bash which has a context of shell_exec_t
-can_exec(tailscaled_t, shell_exec_t)
 # Make tailscaled_t context an entry point for auth login programs like /usr/bin/login
 auth_login_entry_type(tailscaled_t)
 # Make tailscaled_t a domain that is used for a login program (/usr/bin/login) - defined in system/authlogin.if
