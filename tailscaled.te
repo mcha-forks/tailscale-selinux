@@ -202,7 +202,8 @@ term_use_ptmx(tailscaled_t)
 # Transform tailscaled_t into a pty type used by a login programs, like sshd - defined in kernel/terminal.if 
 term_login_pty(tailscaled_t)
 # Allow tailscaled_t to read and write to a generic pty type
-allow tailscaled_t devpts_t:chr_file { read write_chr_file_perms setattr relabel_chr_file_perms };
+allow tailscaled_t devpts_t:chr_file { rw_chr_file_perms setattr getattr relabelfrom };
+term_create_pty(tailscaled_t, devpts_t)
 
 # Allow tailscaled_t to transition to the unconfined domain by executing a shell - defined in roles/unconfineduser.if
 # This is required when the user that logs in over SSH, is unconfined (which is a typical use case in most cases)
