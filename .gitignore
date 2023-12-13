@@ -2,3 +2,5 @@
 /tailscale-selinux-*.tar.gz
 /tailscale-selinux-*/
 /results_tailscale-selinux/
+/tmp
+/tailscaled.pp
