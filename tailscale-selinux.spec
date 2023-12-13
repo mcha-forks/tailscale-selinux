@@ -2,8 +2,8 @@
 %global modulename tailscaled
 
 Name:           tailscale-selinux
-Version:        0.0.1
-Release:        %autorelease
+Version:        0.0.2
+Release:        1
 Summary:        Tailscale SELinux policy
 License:        BSD
 URL:            https://github.com/mcha-forks/%{name}
