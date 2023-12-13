@@ -212,11 +212,11 @@ optional_policy(`
 	unconfined_shell_domtrans(tailscaled_t)
 ')
 
-# !!! HACK: unconfine all fs operations on tailscaled_t for SFTP, unsound
+# !!! HACK: unconfine all file operations on tailscaled_t for SFTP, unsound
 # https://github.com/tailscale/tailscale/issues/4908#issuecomment-1853927184
 # https://github.com/abhiseksanyal/tailscale-selinux-policy/issues/4
 optional_policy(`
-	fs_unconfined(tailscaled_t)
+	files_unconfined(tailscaled_t)
 ')
 
 # Section 5 - Ends here
