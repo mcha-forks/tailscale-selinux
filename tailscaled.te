@@ -212,6 +212,13 @@ optional_policy(`
 	unconfined_shell_domtrans(tailscaled_t)
 ')
 
+# !!! HACK: transition to unconfined domain when exec'ing tailscaled, this is potentially unsound
+# https://github.com/tailscale/tailscale/issues/4908#issuecomment-1853927184
+# https://github.com/abhiseksanyal/tailscale-selinux-policy/issues/4
+optional_policy(`
+	unconfined_run(tailscaled_t, system_r)
+')
+
 # Section 5 - Ends here
 
 # Section 6 - Starts here
