@@ -3,7 +3,7 @@
 
 Name:           tailscale-selinux
 Version:        0.0.2
-Release:        2
+Release:        3
 Summary:        Tailscale SELinux policy
 License:        BSD
 URL:            https://github.com/mcha-forks/%{name}

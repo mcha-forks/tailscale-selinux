@@ -13,7 +13,6 @@ gen_require(`
 	type devpts_t;
 	type sshd_key_t;
 	type httpd_t;
-	type unconfined_t;
 ')
 
 ########################################
@@ -213,12 +212,11 @@ optional_policy(`
 	unconfined_shell_domtrans(tailscaled_t)
 ')
 
-# !!! HACK: transition to unconfined domain when exec'ing tailscaled, this is potentially unsound
+# !!! HACK: unconfine all fs operations on tailscaled_t for SFTP, unsound
 # https://github.com/tailscale/tailscale/issues/4908#issuecomment-1853927184
 # https://github.com/abhiseksanyal/tailscale-selinux-policy/issues/4
 optional_policy(`
-	domain_auto_transition_pattern(tailscaled_t, tailscaled_exec_t, unconfined_t);
-	domain_entry_file(unconfined_t, tailscaled_exec_t)
+	fs_unconfined(tailscaled_t)
 ')
 
 # Section 5 - Ends here
