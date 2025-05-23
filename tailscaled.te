@@ -228,4 +228,9 @@ optional_policy(`
 allow httpd_t tailscale_var_run_t:sock_file { write };
 allow httpd_t tailscaled_t:unix_stream_socket { connectto };
 
+# Allow tailscaled to seal keys in TPM
+optional_policy(`
+	dev_rw_tpm(tailscaled_t)
+')
+
 # Section 6 - Ends here
